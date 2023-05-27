@@ -1,5 +1,3 @@
-const api = require('@actual-app/api');
-
 const extensions = 'https://developer.chrome.com/docs/extensions'
 const tcb = 'https://onlinebanking.techcombank.com.vn/'
 const tcb_domain = '.techcombank.com.vn'
@@ -14,18 +12,6 @@ async function getTransactions(minDate: string, maxDate: string, from: number, c
   const url = `https://onlinebanking.techcombank.com.vn/api/transaction-manager/client-api/v2/transactions?bookingDateGreaterThan=${minDate}&bookingDateLessThan=${maxDate}&from=${from}&size=${count}`;
   const r = await fetch(url);
   console.log(await r.json())
-}
-
-async function getLastActualTransactions() {
-  await api.init({
-    // Budget data will be cached locally here, in subdirectories for each file.
-    dataDir: '/tmp/actual',
-    // This is the URL of your running server
-    serverURL: 'https://actual.anhdchu.com',
-    // This is the password you use to log into the server
-    password: '3v3rand43v3r',
-  });
-  return await api.runQuery(api.q('transactions').select('*').orderBy('date'));
 }
 
 chrome.action.onClicked.addListener(async (tab: chrome.tabs.Tab) => {

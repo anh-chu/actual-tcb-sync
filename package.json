@@ -25,7 +25,6 @@
     "webpack-merge": "^5.9.0"
   },
   "dependencies": {
-    "@actual-app/api": "^6.0.1",
     "assert": "^2.0.0",
     "browserify-zlib": "^0.2.0",
     "constants-browserify": "^1.0.0",
@@ -34,10 +33,5 @@
     "process": "^0.11.10",
     "stream-browserify": "^3.0.0",
     "util": "^0.12.5"
-  },
-  "overrides": {
-    "@actual-app/api": {
-      "better-sqlite3": "git://github.com/anh-chu/better-sqlite3.git#1"
-    }
   }
 }

@@ -18,10 +18,6 @@
   },
   "permissions": ["activeTab", "scripting", "storage"],
   "host_permissions": [
-    "https://*.techcombank.com.vn/*",
-    "https://actual.anhdchu.com/*"
-  ],
-  "content_security_policy": {
-    "extension_pages": "default-src 'self'; connect-src https://* data: blob: filesystem:;"
-  }
+    "https://*.techcombank.com.vn/*"
+  ]
 }
