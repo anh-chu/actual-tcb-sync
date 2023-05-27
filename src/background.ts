@@ -1,21 +1,54 @@
-'use strict';
+const api = require('@actual-app/api');
 
-// With background scripts you can communicate with popup
-// and contentScript files.
-// For more information on background script,
-// See https://developer.chrome.com/extensions/background_pages
+const extensions = 'https://developer.chrome.com/docs/extensions'
+const tcb = 'https://onlinebanking.techcombank.com.vn/'
+const tcb_domain = '.techcombank.com.vn'
 
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  if (request.type === 'GREETINGS') {
-    const message: string = `Hi ${
-      sender.tab ? 'Con' : 'Pop'
-    }, my name is Bac. I am from Background. It's great to hear from you.`;
+async function getArrangements() {
+  const url = 'https://onlinebanking.techcombank.com.vn/api/arrangement-manager/client-api/v2/productsummary/context/arrangements?businessFunction=Product%20Summary&resourceName=Product%20Summary&privilege=view';
+  const r = await fetch(url);
+  console.log(await r.json())
+}
 
-    // Log message coming from the `request` parameter
-    console.log(request.payload.message);
-    // Send a response message
-    sendResponse({
-      message,
+async function getTransactions(minDate: string, maxDate: string, from: number, count: number) {
+  const url = `https://onlinebanking.techcombank.com.vn/api/transaction-manager/client-api/v2/transactions?bookingDateGreaterThan=${minDate}&bookingDateLessThan=${maxDate}&from=${from}&size=${count}`;
+  const r = await fetch(url);
+  console.log(await r.json())
+}
+
+async function getLastActualTransactions() {
+  await api.init({
+    // Budget data will be cached locally here, in subdirectories for each file.
+    dataDir: '/tmp/actual',
+    // This is the URL of your running server
+    serverURL: 'https://actual.anhdchu.com',
+    // This is the password you use to log into the server
+    password: '3v3rand43v3r',
+  });
+  return await api.runQuery(api.q('transactions').select('*').orderBy('date'));
+}
+
+chrome.action.onClicked.addListener(async (tab: chrome.tabs.Tab) => {
+  if (tab.url?.startsWith(extensions) || tab.url?.startsWith(tcb)) {
+    // Retrieve the action badge to check if the extension is 'ON' or 'OFF'
+    const prevState = await chrome.action.getBadgeText({ tabId: tab.id });
+    // Next state will always be the opposite
+    const nextState = prevState === 'ON' ? 'OFF' : 'ON'
+
+    // Set the action badge to the next state
+    await chrome.action.setBadgeText({
+      tabId: tab.id,
+      text: nextState,
     });
-  }
+
+    await getArrangements();
+    // await getTransactions();
+    const l = await getLastActualTransactions();
+    console.log(l);
+  }});
+
+chrome.runtime.onInstalled.addListener(async () => {
+  await chrome.action.setBadgeText({
+    text: "OFF",
+  });
 });

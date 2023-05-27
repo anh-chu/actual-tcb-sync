@@ -2,6 +2,7 @@
 
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const webpack = require('webpack')
 
 const PATHS = require('./paths');
 
@@ -68,9 +69,15 @@ const common = {
       ],
     }),
     // Extract CSS into separate files
+    new webpack.ProvidePlugin({
+      Buffer: ['buffer', 'Buffer'],
+    }),
     new MiniCssExtractPlugin({
       filename: '[name].css',
     }),
+    new webpack.ProvidePlugin({
+      process: 'process/browser',
+    })
   ],
 };
 
