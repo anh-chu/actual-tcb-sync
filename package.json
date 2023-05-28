@@ -12,6 +12,8 @@
   },
   "devDependencies": {
     "@types/chrome": "^0.0.181",
+    "@types/json-query": "^2.2.3",
+    "@types/json2csv__plainjs": "^6.1.0",
     "adm-zip": "^0.5.10",
     "copy-webpack-plugin": "^10.2.4",
     "css-loader": "^6.7.4",
@@ -25,10 +27,14 @@
     "webpack-merge": "^5.9.0"
   },
   "dependencies": {
+    "@json2csv/plainjs": "^6.1.3",
     "assert": "^2.0.0",
     "browserify-zlib": "^0.2.0",
+    "buffer": "^6.0.3",
     "constants-browserify": "^1.0.0",
     "crypto-browserify": "^3.12.0",
+    "json-query": "^2.2.2",
+    "jszip": "^3.10.1",
     "path-browserify": "^1.0.1",
     "process": "^0.11.10",
     "stream-browserify": "^3.0.0",

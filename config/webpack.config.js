@@ -9,7 +9,7 @@ const PATHS = require('./paths');
 const config = (env, argv) =>
   merge(common, {
     entry: {
-      // popup: PATHS.src + '/popup.ts',
+      popup: PATHS.src + '/popup.ts',
       // contentScript: PATHS.src + '/contentScript.ts',
       background: PATHS.src + '/background.ts',
       // bundle: PATHS.src + '/bundle.js',
@@ -25,7 +25,7 @@ const config = (env, argv) =>
         "assert": require.resolve("assert/"),
         "node-libofx": false,
         "constants": require.resolve("constants-browserify"),
-        "buffer": require.resolve("buffer"),
+        "buffer": require.resolve("buffer/"),
         fs: false,
       },
     }

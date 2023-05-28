@@ -7,16 +7,13 @@
     "92": "favicon.png"
   },
   "action": {
-    "default_icon": "favicon.png"
-  },
-  "options_ui": {
-    "page": "options.html",
-    "open_in_tab": false
+    "default_icon": "favicon.png",
+    "default_popup": "popup.html"
   },
   "background": {
     "service_worker": "background.js"
   },
-  "permissions": ["activeTab", "scripting", "storage"],
+  "permissions": ["activeTab", "scripting", "storage", "downloads"],
   "host_permissions": [
     "https://*.techcombank.com.vn/*"
   ]
