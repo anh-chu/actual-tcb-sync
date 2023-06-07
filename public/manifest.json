@@ -10,11 +10,16 @@
     "default_icon": "favicon.png",
     "default_popup": "popup.html"
   },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": false
+  },
   "background": {
     "service_worker": "background.js"
   },
   "permissions": ["activeTab", "scripting", "storage", "downloads"],
   "host_permissions": [
-    "https://*.techcombank.com.vn/*"
+    "https://*.techcombank.com.vn/*",
+    "*://localhost:*/*"
   ]
 }

@@ -4,12 +4,44 @@
     <title>Extension Options</title>
   </head>
   <body>
-    <input type="date" id="min-date"/>
-    <input type="date" id="max-date"/>
+    <input type="date" id="min-date" />
+    <input type="date" id="max-date" />
 
     <div id="status"></div>
-    <button id="run">Run</button>
+    <button id="run">Download ZIPs</button>
+    <button id="auto-run">Sync with API</button>
+
+    <div id="lastSyncWrap">
+      <b>Last sync:</b>
+      <i id="lastSync"></i>
+    </div>
 
     <script src="popup.js"></script>
   </body>
 </html>
+
+<style>
+  body {
+    width: 200px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+
+  input {
+    width: 100%;
+    margin-bottom: 5px;
+  }
+
+  button {
+    width: 100%;
+    margin-bottom: 5px;
+  }
+
+  #status {
+    margin-bottom: 5px;
+  }
+
+  #lastSyncWrap {
+    margin-top: 5px;
+  }
+</style>
