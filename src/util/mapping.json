@@ -1,113 +1,102 @@
 [
-    {
-        "id": "429264b5-2857-4003-be53-be01565707fa",
-        "name": "BoA",
-        "type": "checking",
-        "offbudget": true,
-        "closed": false
-    },
-    {
-        "id": "522d95f1-9a00-4672-b8f8-30edfb70ad39",
-        "name": "TCB Main",
-        "type": "checking",
-        "offbudget": false,
-        "closed": false,
-        "arrangementIds": [
-            "0ce41c5d-4e89-4789-b2a6-beef27d693d0"
-        ]
-    },
-    {
-        "id": "bc4da435-c4e0-4dad-8908-c82c477929f3",
-        "name": "TCB Saving",
-        "type": "savings",
-        "offbudget": true,
-        "closed": false,
-        "arrangementIds": [
-            "b2891fa4-2428-4843-bf79-55b97712dea7",
-            "010705a3-3d6d-4f23-bc37-6dacdf070643"
-        ]
-    },
-    {
-        "id": "98a17b49-a160-403b-afc9-d543505afa44",
-        "name": "TCB Sub",
-        "type": "checking",
-        "offbudget": false,
-        "closed": false,
-        "arrangementIds": [
-            "110e31d6-2b6e-44fc-b784-46113a589843"
-        ]
-    },
-    {
-        "id": "c1e003b3-6939-451b-95b4-14158aedd225",
-        "name": "TPB",
-        "type": "checking",
-        "offbudget": false,
-        "closed": false
-    },
-    {
-        "id": "7cf25bd8-e82a-44cd-99a7-554423eace14",
-        "name": "TCB Credit Main",
-        "type": "credit",
-        "offbudget": false,
-        "closed": false,
-        "arrangementIds": [
-            "f4d72df2-ea34-4c87-bd8b-969030fa10b2"
-        ]
-    },
-    {
-        "id": "2c511c68-d7ff-4a5c-ab28-0ff53b015d80",
-        "name": "TCB Credit Sub",
-        "type": "credit",
-        "offbudget": false,
-        "closed": false,
-        "arrangementIds": [
-            "ec84c8bb-4d3f-47d1-a155-7e16413e7f5a"
-        ]
-    },
-    {
-        "id": "daa6cf12-8367-439b-9cb7-d2586ca73927",
-        "name": "TCB Goals",
-        "type": "savings",
-        "offbudget": true,
-        "closed": false,
-        "goalIds": [
-            "14603002041552",
-            "14603002033495"
-        ]
-    },
-    {
-        "id": "2e837d76-d081-4a41-a337-62b43ad82387",
-        "name": "Real Estates",
-        "type": "savings",
-        "offbudget": true,
-        "closed": false
-    },
-    {
-        "id": "10aebba9-07ed-40de-8c8e-1efc54c75530",
-        "name": "Stocks (Thanh)",
-        "type": "savings",
-        "offbudget": true,
-        "closed": false
-    },
-    {
-        "id": "e5fc6f53-a2f0-401c-8b4b-20528c069887",
-        "name": "Coinbase",
-        "type": "investment",
-        "offbudget": true,
-        "closed": false
-    },
-    {
-        "id": "438b8478-0e8f-44b5-8cb9-06eab08849eb",
-        "name": "Qapital",
-        "type": "savings",
-        "offbudget": true,
-        "closed": false
-    },
-    {
-        "id": "7324aa6a-9e9c-4ae0-ab63-b53d0474e799",
-        "name": "Fidelity",
-        "type": "investment",
-        "offbudget": true,
-        "closed": false
-    }
+  {
+    "id": "429264b5-2857-4003-be53-be01565707fa",
+    "name": "BoA",
+    "type": "checking",
+    "offbudget": true,
+    "closed": false
+  },
+  {
+    "id": "522d95f1-9a00-4672-b8f8-30edfb70ad39",
+    "name": "TCB Main",
+    "type": "checking",
+    "offbudget": false,
+    "closed": false,
+    "arrangementIds": ["0ce41c5d-4e89-4789-b2a6-beef27d693d0"]
+  },
+  {
+    "id": "bc4da435-c4e0-4dad-8908-c82c477929f3",
+    "name": "TCB Saving",
+    "type": "savings",
+    "offbudget": true,
+    "closed": false,
+    "arrangementIds": [
+      "b2891fa4-2428-4843-bf79-55b97712dea7",
+      "010705a3-3d6d-4f23-bc37-6dacdf070643"
+    ]
+  },
+  {
+    "id": "98a17b49-a160-403b-afc9-d543505afa44",
+    "name": "TCB Sub",
+    "type": "checking",
+    "offbudget": false,
+    "closed": false,
+    "arrangementIds": ["110e31d6-2b6e-44fc-b784-46113a589843"]
+  },
+  {
+    "id": "c1e003b3-6939-451b-95b4-14158aedd225",
+    "name": "TPB",
+    "type": "checking",
+    "offbudget": false,
+    "closed": false
+  },
+  {
+    "id": "7cf25bd8-e82a-44cd-99a7-554423eace14",
+    "name": "TCB Credit Main",
+    "type": "credit",
+    "offbudget": false,
+    "closed": false,
+    "arrangementIds": ["f4d72df2-ea34-4c87-bd8b-969030fa10b2"]
+  },
+  {
+    "id": "2c511c68-d7ff-4a5c-ab28-0ff53b015d80",
+    "name": "TCB Credit Sub",
+    "type": "credit",
+    "offbudget": false,
+    "closed": false,
+    "arrangementIds": ["ec84c8bb-4d3f-47d1-a155-7e16413e7f5a"]
+  },
+  {
+    "id": "daa6cf12-8367-439b-9cb7-d2586ca73927",
+    "name": "TCB Goals",
+    "type": "savings",
+    "offbudget": true,
+    "closed": false,
+    "goalIds": ["14603002041552", "14603002033495"]
+  },
+  {
+    "id": "2e837d76-d081-4a41-a337-62b43ad82387",
+    "name": "Real Estates",
+    "type": "savings",
+    "offbudget": true,
+    "closed": false
+  },
+  {
+    "id": "10aebba9-07ed-40de-8c8e-1efc54c75530",
+    "name": "Stocks (Thanh)",
+    "type": "savings",
+    "offbudget": true,
+    "closed": false
+  },
+  {
+    "id": "e5fc6f53-a2f0-401c-8b4b-20528c069887",
+    "name": "Coinbase",
+    "type": "investment",
+    "offbudget": true,
+    "closed": false
+  },
+  {
+    "id": "438b8478-0e8f-44b5-8cb9-06eab08849eb",
+    "name": "Qapital",
+    "type": "savings",
+    "offbudget": true,
+    "closed": false
+  },
+  {
+    "id": "7324aa6a-9e9c-4ae0-ab63-b53d0474e799",
+    "name": "Fidelity",
+    "type": "investment",
+    "offbudget": true,
+    "closed": false
+  }
 ]
