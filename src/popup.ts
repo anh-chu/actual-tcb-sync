@@ -52,6 +52,7 @@ document.getElementById("run")?.addEventListener("click", sync);
 document.getElementById("auto-run")?.addEventListener("click", () => {
   chrome.runtime.sendMessage({
     action: "auto-run",
+    minDate: (<HTMLInputElement>document.getElementById("min-date")).value,
   });
 });
 

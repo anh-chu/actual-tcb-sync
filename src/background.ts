@@ -23,13 +23,14 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.action != "auto-run") return true;
+  const minDate: string = message.minDate || "";
 
   getCurrentTab().then((tab) => {
     if (!tab.url?.startsWith(tcb)) {
       sendResponse({ text: "Wrong tab!" });
       return true;
     }
-    apiSync().then(() => {});
+    apiSync(false, minDate).then(() => {});
   });
 
   return true;

@@ -14,7 +14,7 @@ export async function execute(
 
   const files: any = [];
 
-  const f = splitAndProcessTransaction(transactions, arrangements);
+  const f = await splitAndProcessTransaction(transactions, arrangements);
 
   f.forEach((arrangement) => {
     if (!arrangement.transactions || !arrangement.transactions.length) return;

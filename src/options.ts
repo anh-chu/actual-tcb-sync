@@ -8,9 +8,17 @@ const saveOptions = () => {
   const actualBudgetPassword = document?.getElementById(
     "actualBudgetPassword"
   )?.value;
+  const exchangeRateKey = document?.getElementById("exchangeRateKey")?.value;
 
   chrome.storage.sync.set(
-    { tcbUrl, actualUrl, actualPassword, actualBudgetId, actualBudgetPassword },
+    {
+      tcbUrl,
+      actualUrl,
+      actualPassword,
+      actualBudgetId,
+      actualBudgetPassword,
+      exchangeRateKey,
+    },
     () => {
       // Update status to let user know options were saved.
       const status = document.getElementById("status");
@@ -35,6 +43,7 @@ const restoreOptions = () => {
       "actualPassword",
       "actualBudgetId",
       "actualBudgetPassword",
+      "exchangeRateKey",
     ],
     (items) => {
       document.getElementById("tcbUrl").value = items.tcbUrl;
@@ -43,6 +52,7 @@ const restoreOptions = () => {
       document.getElementById("actualBudgetId").value = items.actualBudgetId;
       document.getElementById("actualBudgetPassword").value =
         items.actualBudgetPassword;
+      document.getElementById("exchangeRateKey").value = items.exchangeRateKey;
     }
   );
 };
