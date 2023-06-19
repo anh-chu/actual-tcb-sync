@@ -1,4 +1,5 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
+ggshield secret scan pre-commit
 npx pretty-quick --staged
