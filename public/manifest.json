@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "Actual Tcb Sync",
-    "version": "0.1.0",
+    "version": "0.3.0",
     "description": "My Chrome Extension",
     "icons": {
         "92": "favicon.png"

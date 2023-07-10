@@ -42,9 +42,6 @@ async function downloadAsFile(content: any, fileName: string) {
 const setDefaults = () => {
   (<HTMLInputElement>document.getElementById("min-date")).value = "";
   (<HTMLInputElement>document.getElementById("max-date")).value = "";
-  chrome.storage.sync.get(["lastSync"], (items) => {
-    document.getElementById("lastSync")?.textContent = items.lastSync;
-  });
 };
 
 document.addEventListener("DOMContentLoaded", setDefaults);
@@ -63,4 +60,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   downloadAsFile(message.body, fileName)
     .then(() => setStatus(fileName))
     .catch((err) => setStatus(err));
+});
+
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if (message.action != "setLastDate") return true;
+  document.getElementById("lastSync")?.textContent = message.body;
 });
