@@ -30,19 +30,8 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       sendResponse({ text: "Wrong tab!" });
       return true;
     }
-    apiSync(false, minDate).then(() => {});
+    apiSync(minDate).then(() => {});
   });
 
   return true;
-});
-
-chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
-  if (
-    tab.url?.startsWith(tcb) &&
-    changeInfo.status == "complete" &&
-    tab.active
-  ) {
-    apiSync(true).then(() => {});
-    return true;
-  }
 });

@@ -2,15 +2,10 @@ import { initActual, getLastTransaction, importTransactions } from "./actual";
 import { getArrangements, getTransactions } from "./tcb";
 import { splitAndProcessTransaction } from "./tcb/process";
 
-export async function apiSync(auto: boolean = false, startDate: string = "") {
+export async function apiSync(startDate: string = "") {
   const tomorrow = new Date(Date.now() + 24 * 60 * 60 * 1000);
   const maxDate = tomorrow.toISOString().split("T")[0];
   const today = new Date().toISOString().split("T")[0];
-  // if (
-  //   auto &&
-  //   maxDate == (await chrome.storage.sync.get(["lastAutoSync"])).lastAutoSync
-  // )
-  //   return;
   const token = await initActual();
   const lastTransactions = await getLastTransaction(token);
 
