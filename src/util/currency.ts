@@ -9,7 +9,7 @@ async function getExchangeRates() {
   if ((await chrome.storage.local.get("exchangeRate"))?.exchangeRateDate) {
     return (await chrome.storage.local.get("exchangeRate"))?.rates;
   }
-  const url = `http://data.fixer.io/api/latest?symbols=USD,EUR,VND&access_key=${accessKey}`;
+  const url = `https://api.apilayer.com/fixer/latest?symbols=USD,EUR,VND&access_key=${accessKey}`;
   const r = await fetch(url);
   const j = await r.json();
   chrome.storage.local.set({
