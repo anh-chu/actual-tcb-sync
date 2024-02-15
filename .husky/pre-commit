@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-ggshield secret scan pre-commit
+gitleaks detect --source . -v
 npx pretty-quick --staged

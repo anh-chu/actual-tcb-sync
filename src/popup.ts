@@ -56,13 +56,20 @@ document.getElementById("auto-run")?.addEventListener("click", () => {
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.action != "download") return true;
   const fileName = `tcb-export ${new Date().toISOString().slice(0, 10)}.zip`;
-  console.log(message.body);
   downloadAsFile(message.body, fileName)
     .then(() => setStatus(fileName))
     .catch((err) => setStatus(err));
+  return true;
 });
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.action != "setLastDate") return true;
   document.getElementById("lastSync")?.textContent = message.body;
+  return true;
+});
+
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if (message.action != "setNewDate") return true;
+  document.getElementById("newSync")?.textContent = message.body;
+  return true;
 });

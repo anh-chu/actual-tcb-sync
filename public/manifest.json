@@ -1,8 +1,8 @@
 {
     "manifest_version": 3,
-    "name": "Actual Tcb Sync",
-    "version": "0.3.0",
-    "description": "My Chrome Extension",
+    "name": "Actual TCB Sync",
+    "version": "0.4.0",
+    "description": "Sync transactions between Actual & Techcombank",
     "icons": {
         "92": "favicon.png"
     },
@@ -10,13 +10,10 @@
         "default_icon": "favicon.png",
         "default_popup": "popup.html"
     },
-    "options_ui": {
-        "page": "options.html",
-        "open_in_tab": false
-    },
+    "options_page": "options.html",
     "background": {
         "service_worker": "background.js"
     },
     "permissions": ["activeTab", "scripting", "storage", "downloads"],
-    "host_permissions": ["https://*.techcombank.com.vn/*", "*://localhost:*/*", "http://data.fixer.io/*"]
+    "host_permissions": ["https://*.techcombank.com.vn/*", "*://*/*", "http://data.fixer.io/*"]
 }

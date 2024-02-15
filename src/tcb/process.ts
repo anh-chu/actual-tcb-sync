@@ -1,10 +1,12 @@
 import jsonQuery from "json-query";
-import { arrangementMapping, goalMapping } from "../util/mapping";
+import { getMappings } from "../util/mapping";
 import { getEURtoVNDrate, getUSDtoVNDrate } from "../util/currency";
 
 // convert transaction of type Transaction to actual transaction of type ActualTransaction
 export async function convertToActualTransaction(
-  transaction: Transaction
+  transaction: Transaction,
+  arrangementMapping: { [key: string]: string },
+  goalMapping: { [key: string]: string }
 ): Promise<ActualTransaction> {
   const a: ActualTransaction = {
     imported_id: transaction.id,
@@ -39,6 +41,7 @@ export async function splitAndProcessTransaction(
   arrangements: Arrangement[],
   forApi: boolean = false
 ) {
+  const { am: arrangementMapping, gm: goalMapping } = await getMappings();
   const converted = await Promise.all(
     arrangements.map(async (arrangement) => {
       const group = jsonQuery(
@@ -55,8 +58,22 @@ export async function splitAndProcessTransaction(
               : +transaction.transactionAmountCurrency.amount;
           if (transaction.counterPartyAccountNumber)
             transaction.description += ` @ ${transaction.counterPartyAccountNumber}`;
+          // remove "Giao dich thanh toan/Purchase - So The/Card No:" from beginning of transaction description
+          if (
+            transaction.description.startsWith(
+              "Giao dich thanh toan/Purchase - So The/Card No:"
+            )
+          )
+            transaction.description = transaction.description.replace(
+              "Giao dich thanh toan/Purchase - So The/Card No:",
+              ""
+            );
           return forApi
-            ? await convertToActualTransaction(transaction)
+            ? await convertToActualTransaction(
+                transaction,
+                arrangementMapping,
+                goalMapping
+              )
             : transaction;
         })
       );

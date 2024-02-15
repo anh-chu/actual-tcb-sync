@@ -11,11 +11,6 @@
         "format": "prettier --write --ignore-unknown \"{config,public,src}/**/*.{html,css,js,ts,json}\"",
         "prepare": "husky install"
     },
-    "husky": {
-        "hooks": {
-            "pre-commit": "pretty-quick --staged"
-        }
-    },
     "devDependencies": {
         "@types/chrome": "^0.0.181",
         "@types/json-query": "^2.2.3",

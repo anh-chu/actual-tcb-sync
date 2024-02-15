@@ -1,38 +1,54 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>My Test Extension Options</title>
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css"
+            integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls"
+            crossorigin="anonymous"
+        />
+        <title>Actual TCB Sync Options</title>
     </head>
 
-    <body>
-        <label>
-            <input type="text" id="tcbUrl" />
-            TCB base URL
-        </label>
-        <label>
-            <input type="text" id="actualUrl" />
-            Actual Base URL
-        </label>
+    <body class="pure-g" style="padding: 16px" onsubmit="return false;">
+        <form class="pure-form pure-form-aligned pure-u-1">
+            <fieldset>
+                <div class="pure-control-group">
+                    <label> TCB base URL </label>
+                    <input type="text" id="tcbUrl" class="pure-input-rounded" required />
+                </div>
+                <div class="pure-control-group">
+                    <label> Actual Base URL </label>
+                    <input type="text" id="actualUrl" class="pure-input-rounded" required />
+                </div>
 
-        <label>
-            <input type="password" id="actualPassword" />
-            Actual password
-        </label>
-        <label>
-            <input type="text" id="actualBudgetId" />
-            Actual budget ID
-        </label>
-        <label>
-            <input type="password" id="actualBudgetPassword" />
-            Actual budget password
-        </label>
-        <label>
-            <input type="password" id="exchangeRateKey" />
-            Exchange rate API key
-        </label>
+                <div class="pure-control-group">
+                    <label> Actual password </label>
+                    <input type="password" id="actualPassword" class="pure-input-rounded" required />
+                </div>
+                <div class="pure-control-group">
+                    <label> Actual budget ID </label>
+                    <input type="text" id="actualBudgetId" class="pure-input-rounded" required />
+                </div>
+                <div class="pure-control-group">
+                    <label> Actual budget password </label>
+                    <input type="password" id="actualBudgetPassword" class="pure-input-rounded" />
+                </div>
+                <div class="pure-control-group">
+                    <label> Exchange rate API key </label>
+                    <input type="password" id="exchangeRateKey" class="pure-input-rounded" />
+                </div>
+                <div class="pure-control-group">
+                    <label> Mappings (JSON list) </label>
+                    <textarea id="mappings" rows="4" style="min-height: 500px" required></textarea>
+                </div>
+            </fieldset>
+        </form>
 
-        <div id="status"></div>
-        <button id="save">Save</button>
+        <div id="status" class="pure-u-1"></div>
+        <div class="pure-u-1">
+            <button id="save" class="pure-button">Save</button>
+        </div>
 
         <script src="options.js"></script>
     </body>

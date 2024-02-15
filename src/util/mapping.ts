@@ -1,21 +1,21 @@
-import mapping from "./mapping.json";
-
-function getMappings() {
+export async function getMappings() {
   const am = {} as { [key: string]: string };
   const gm = {} as { [key: string]: string };
-  mapping.forEach((account) => {
-    if (account.arrangementIds) {
-      account.arrangementIds.forEach((id) => {
-        am[id] = account.id;
-      });
-    }
-    if (account.goalIds) {
-      account.goalIds.forEach((id) => {
-        gm[id] = account.id;
-      });
-    }
-  });
+  const mappingString = (await chrome.storage.sync.get(["mappings"])).mappings;
+  if (mappingString && typeof mappingString !== "undefined") {
+    const mapping = JSON.parse(mappingString);
+    mapping.forEach((account: any) => {
+      if (account.arrangementIds) {
+        account.arrangementIds.forEach((id: string) => {
+          am[id] = account.id;
+        });
+      }
+      if (account.goalIds) {
+        account.goalIds.forEach((id: string) => {
+          gm[id] = account.id;
+        });
+      }
+    });
+  }
   return { am, gm };
 }
-
-export const { am: arrangementMapping, gm: goalMapping } = getMappings();

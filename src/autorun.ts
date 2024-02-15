@@ -1,6 +1,7 @@
 import { initActual, getLastTransaction, importTransactions } from "./actual";
 import { getArrangements, getTransactions } from "./tcb";
 import { splitAndProcessTransaction } from "./tcb/process";
+import { sendMessage } from "./util/chrome";
 
 export async function apiSync(startDate: string = "") {
   const tomorrow = new Date(Date.now() + 24 * 60 * 60 * 1000);
@@ -9,10 +10,10 @@ export async function apiSync(startDate: string = "") {
   const token = await initActual();
   const lastTransactions = await getLastTransaction(token);
 
-  chrome.runtime.sendMessage({
+  sendMessage({
     action: "setLastDate",
     body: lastTransactions.data[0].date,
-  });
+  }).then(() => {});
 
   const arrangements = await getArrangements();
   // const goals = await getAccounts(token);
@@ -34,4 +35,10 @@ export async function apiSync(startDate: string = "") {
       arrangement.transactions
     );
   }
+
+  const latestTransaction = await getLastTransaction(token);
+  await sendMessage({
+    action: "setNewDate",
+    body: latestTransaction.data[0].date,
+  }).then(() => {});
 }
