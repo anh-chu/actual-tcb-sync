@@ -13,8 +13,6 @@ const handleFileSelect = () => {
     document?.getElementById("actualBudgetId")?.value = config.actual_budget_id;
     document?.getElementById("actualBudgetPassword")?.value =
       config.actual_budget_password;
-    document?.getElementById("exchangeRateKey")?.value =
-      config.exchange_rate_api_key;
     document?.getElementById("mappings")?.value = JSON.stringify(
       config.mappings
     );
@@ -32,7 +30,6 @@ const saveOptions = () => {
   const actualBudgetPassword = document?.getElementById(
     "actualBudgetPassword"
   )?.value;
-  const exchangeRateKey = document?.getElementById("exchangeRateKey")?.value;
   const mappings = document?.getElementById("mappings")?.value;
   chrome.storage.sync.set(
     {
@@ -41,7 +38,6 @@ const saveOptions = () => {
       actualPassword,
       actualBudgetId,
       actualBudgetPassword,
-      exchangeRateKey,
       mappings,
     },
     () => {
@@ -68,7 +64,6 @@ const restoreOptions = () => {
       "actualPassword",
       "actualBudgetId",
       "actualBudgetPassword",
-      "exchangeRateKey",
       "mappings",
     ],
     (items) => {
@@ -80,8 +75,6 @@ const restoreOptions = () => {
         items?.actualBudgetId || "";
       document.getElementById("actualBudgetPassword").value =
         items?.actualBudgetPassword || "";
-      document.getElementById("exchangeRateKey").value =
-        items?.exchangeRateKey || "";
       document.getElementById("mappings").value = items?.mappings || "";
     }
   );

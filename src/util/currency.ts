@@ -1,38 +1,24 @@
-let accessKey: string;
-chrome.storage.sync.get(["exchangeRateKey"], (items) => {
-  accessKey = items.exchangeRateKey;
-});
+const baseUrl = "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/";
 
-async function getExchangeRates() {
-  // check if exchangeRate is in extension local storage and return if exchangeRateDate is today
-  // if not, get exchangeRate from exchangeratesapi.io
-  if ((await chrome.storage.local.get("exchangeRate"))?.exchangeRateDate) {
-    return (await chrome.storage.local.get("exchangeRate"))?.rates;
+async function getLocalExchangeRate(key: string) {
+  const existing = await chrome.storage.local.get(key);
+  if (existing && existing.time >= new Date()) return existing.vnd;
+  return;
+}
+
+async function saveLocalExchangeRate(key: string, value: any) {
+  await chrome.storage.local.set({key: {vnd: value, time: new Date()}});
+}
+
+export async function getExchangeRate(currency: string) {
+  const key = currency.toLocaleLowerCase();
+  let vnd = await getLocalExchangeRate(key);
+  if (!vnd) {
+    const url = baseUrl + key + ".min.json";
+    const r = await fetch(url);
+    const j = await r.json();
+    vnd = j[key].vnd;
+    await saveLocalExchangeRate(key, vnd);
   }
-  const url = `https://api.apilayer.com/fixer/latest?symbols=USD,EUR,VND,IDR`;
-  const headers = {
-    apikey: accessKey,
-  };
-  const r = await fetch(url, {
-    headers: headers,
-  });
-  const j = await r.json();
-  chrome.storage.local.set({
-    exchangeRate: { rates: j, exchangeRateDate: Date.now() },
-  });
-  return j;
-}
-
-// convert USD to VND using exchangeratesapi.io
-export async function getUSDtoVNDrate() {
-  const j = await getExchangeRates();
-  const e = j.rates.VND / j.rates.USD;
-  return e;
-}
-
-// convert USD to VND using exchangeratesapi.io
-export async function getEURtoVNDrate() {
-  const j = await getExchangeRates();
-  const e = j.rates.VND / j.rates.EUR;
-  return e;
+  return vnd
 }

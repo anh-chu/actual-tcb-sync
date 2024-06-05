@@ -1,6 +1,6 @@
 import jsonQuery from "json-query";
 import { getMappings } from "../util/mapping";
-import { getEURtoVNDrate, getUSDtoVNDrate } from "../util/currency";
+import { getEURtoVNDrate, getExchangeRate, getUSDtoVNDrate } from "../util/currency";
 
 // convert transaction of type Transaction to actual transaction of type ActualTransaction
 export async function convertToActualTransaction(
@@ -16,14 +16,9 @@ export async function convertToActualTransaction(
     notes: transaction.description,
     account: arrangementMapping[transaction.arrangementId],
   };
-  if (transaction.transactionAmountCurrency.currencyCode == "USD") {
-    const exchangRate = await getUSDtoVNDrate();
-    a.amount = Math.round(
-      +transaction.transactionAmountCurrency.amount * exchangRate * 100
-    );
-  } else if (transaction.transactionAmountCurrency.currencyCode == "EUR") {
-    const exchangRate = await getEURtoVNDrate();
-    a.amount = Math.round(
+  if (transaction.transactionAmountCurrency.currencyCode !== "VND") {
+    const exchangRate = await getExchangeRate(transaction.transactionAmountCurrency.currencyCode);
+    a.amount = Math.ceil(
       +transaction.transactionAmountCurrency.amount * exchangRate * 100
     );
   }
