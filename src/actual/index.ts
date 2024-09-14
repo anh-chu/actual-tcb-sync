@@ -1,3 +1,5 @@
+import { getMappings } from "../util/mapping";
+
 let actual: string;
 let actualPassword: string;
 let actualBudgetId: string;
@@ -51,6 +53,23 @@ export async function getAccounts(token: string) {
   return await r.json();
 }
 
+export async function getAccountBalance(
+  token: string,
+  accountId?: string
+): Promise<{ value: number }> {
+  const body = JSON.stringify({ _: [accountId] });
+  const r = await fetch(`${actual}/api/getAccountBalance?paramsInBody=true`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body,
+  });
+  return await r.json();
+}
+
 export async function getLastTransaction(
   token: string,
   accountId?: string
@@ -60,11 +79,10 @@ export async function getLastTransaction(
     id: string;
   }[];
 }> {
+  const { checkpoint: checkpoint } = await getMappings();
   const raw = {
     q: "transactions",
-    filter: accountId
-      ? { account: accountId, cleared: true }
-      : { cleared: true },
+    filter: { account: accountId ? accountId : checkpoint, cleared: true },
     select: "date",
     orderBy: {
       date: "desc",

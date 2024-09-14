@@ -73,3 +73,10 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   document.getElementById("newSync")?.textContent = message.body;
   return true;
 });
+
+document.getElementById("fidelity")?.addEventListener("click", () => {
+  chrome.runtime.sendMessage({
+    action: "fidelity",
+  });
+  return true;
+});

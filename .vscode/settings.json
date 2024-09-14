@@ -2,5 +2,6 @@
     "prettier.tabWidth": 4,
     "prettier.useTabs": true,
     "prettier.singleAttributePerLine": true,
-    "prettier.printWidth": 120
+    "prettier.printWidth": 120,
+    "editor.tabSize": 2
 }

@@ -8,6 +8,7 @@ const handleFileSelect = () => {
     const text = reader.result;
     const config = JSON.parse(text);
     document?.getElementById("tcbUrl")?.value = config.tcb_url;
+    document?.getElementById("fidelityUrl")?.value = config.fidelity_url;
     document?.getElementById("actualUrl")?.value = config.actual_url;
     document?.getElementById("actualPassword")?.value = config.actual_password;
     document?.getElementById("actualBudgetId")?.value = config.actual_budget_id;
@@ -24,6 +25,7 @@ const handleFileSelect = () => {
 
 const saveOptions = () => {
   const tcbUrl = document?.getElementById("tcbUrl")?.value;
+  const fidelityUrl = document?.getElementById("fidelityUrl")?.value;
   const actualUrl = document?.getElementById("actualUrl")?.value;
   const actualPassword = document?.getElementById("actualPassword")?.value;
   const actualBudgetId = document?.getElementById("actualBudgetId")?.value;
@@ -34,6 +36,7 @@ const saveOptions = () => {
   chrome.storage.sync.set(
     {
       tcbUrl,
+      fidelityUrl,
       actualUrl,
       actualPassword,
       actualBudgetId,
@@ -60,6 +63,7 @@ const restoreOptions = () => {
   chrome.storage.sync.get(
     [
       "tcbUrl",
+      "fidelityUrl",
       "actualUrl",
       "actualPassword",
       "actualBudgetId",
@@ -68,6 +72,7 @@ const restoreOptions = () => {
     ],
     (items) => {
       document.getElementById("tcbUrl").value = items?.tcbUrl || "";
+      document.getElementById("fidelityUrl").value = items?.fidelityUrl || "";
       document.getElementById("actualUrl").value = items?.actualUrl || "";
       document.getElementById("actualPassword").value =
         items?.actualPassword || "";

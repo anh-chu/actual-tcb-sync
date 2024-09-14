@@ -1,9 +1,9 @@
 import { Parser } from "@json2csv/plainjs";
-import { splitAndProcessTransaction } from "./tcb/process";
-import { getArrangements, getTransactions } from "./tcb";
-import { flattenObject } from "./util/flatten";
+import { splitAndProcessTransaction } from "../tcb/process";
+import { getArrangements, getTransactions } from "../tcb";
+import { flattenObject } from "../util/flatten";
 
-export async function execute(
+export async function downloadTcbNoSync(
   minDate: string,
   maxDate: string,
   from: number = 0,

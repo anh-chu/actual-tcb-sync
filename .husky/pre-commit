@@ -1,5 +1,16 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-gitleaks detect --source . -v
+if ! [ -x "$(command -v docker)" ]; then
+  if ! [ -x "$(command -v podman)" ]; then
+    echo 'docker or podman could not be found.' >&2
+    exit 1
+  fi
+  podman run --rm -v $PWD:/app ghcr.io/zricethezav/gitleaks:latest detect --source /app -v 
+fi
+
+if [ -x "$(command -v docker)" ]; then
+  docker run --rm -v $PWD:/app ghcr.io/zricethezav/gitleaks:latest detect --source /app -v 
+fi
+
 npx pretty-quick --staged
