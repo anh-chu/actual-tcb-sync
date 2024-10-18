@@ -6,6 +6,8 @@ import { fidelitySync } from "./sync/sync";
 let tcb: string;
 let fidelity: string;
 
+const syncInterval = 10 * 60 * 1000;
+
 chrome.storage.sync.get(["tcbUrl", "fidelityUrl"], (items) => {
   tcb = items.tcbUrl;
   fidelity = items.fidelityUrl;
@@ -13,7 +15,8 @@ chrome.storage.sync.get(["tcbUrl", "fidelityUrl"], (items) => {
 
 function runFidelitySync() {
   return getCurrentTab().then((tab) => {
-    if (!tab.url?.startsWith(fidelity)) throw new Error("Wrong tab!");
+    if (!tab.url?.startsWith(fidelity) && tab.url?.includes("login"))
+      throw new Error("Wrong tab!");
     fidelitySync().then(() => {});
   });
 }
@@ -58,13 +61,13 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 // sync Fidelity automatically on tab change
 chrome.tabs.onActivated.addListener((activeInfo) => {
   chrome.tabs.get(activeInfo.tabId).then((tab) => {
-    if (tab.url?.startsWith(fidelity)) {
+    if (tab.url?.startsWith(fidelity) && !tab.url?.includes("login")) {
       chrome.storage.local.get(["lastFidelitySync"], (items) => {
         const lastFidelitySync = items.lastFidelitySync;
         if (
           lastFidelitySync &&
           new Date().getTime() - new Date(lastFidelitySync).getTime() <
-            4 * 60 * 60 * 1000
+            syncInterval
         )
           return;
         runFidelitySync().then(() =>
@@ -85,8 +88,7 @@ chrome.tabs.onActivated.addListener((activeInfo) => {
         const lastTcbSync = items.lastTcbSync;
         if (
           lastTcbSync &&
-          new Date().getTime() - new Date(lastTcbSync).getTime() <
-            4 * 60 * 60 * 1000
+          new Date().getTime() - new Date(lastTcbSync).getTime() < syncInterval
         )
           return;
         runTcbSync().then(() =>
