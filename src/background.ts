@@ -21,10 +21,10 @@ function runFidelitySync() {
   });
 }
 
-function runTcbSync() {
+function runTcbSync(minDate: string = "") {
   return getCurrentTab().then((tab) => {
     if (!tab.url?.startsWith(tcb)) throw new Error("Wrong tab!");
-    apiSync().then(() => {});
+    apiSync(minDate).then(() => {});
   });
 }
 
@@ -44,7 +44,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     }
     case "auto-run": {
       const minDate: string = message.minDate;
-      runTcbSync().then(() =>
+      runTcbSync(minDate).then(() =>
         chrome.storage.local.set({ lastTcbSync: new Date().toISOString() })
       );
       break;
