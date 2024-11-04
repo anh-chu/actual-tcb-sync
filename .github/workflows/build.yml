@@ -30,14 +30,18 @@ jobs:
     - name: Archive build artifacts
       uses: actions/upload-artifact@v3
       with:
-        name: dist-without-markdown
+        name: actual-tcb-sync
         path: build
-    - name: Create a Release
-      uses: elgohr/Github-Release-Action@v5
-      env:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Zip build for release
+      uses: montudor/action-zip@v1
       with:
+        args: zip -qq -r actual-tcb-sync.zip build
+    - name: Release
+      uses: "marvinpinto/action-automatic-releases@latest"
+      with:
+        repo_token: "${{ secrets.GITHUB_TOKEN }}"
+        prerelease: false
         title: Actual TCB Sync
-        workdir: build
-        tag: latest
-        
+        automatic_release_tag: latest
+        files: |
+          actual-tcb-sync.zip
